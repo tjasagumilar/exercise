@@ -11,7 +11,7 @@ This will open the project in http://localhost:3000/
 
 Preferrably you can use https://tailwindcss.com for styling elements, but feel free to use your own CSS as well if you are not familiar with tailwind.
 
-## Frontend assignment
+# Frontend assignment
 You will be using a fake JSON response service called DummyJSON - https://dummyjson.com/docs/users. For fetching data you can add [axios](https://axios-http.com/docs/intro) or any other http library.
 - Develop a page which is split into 2 sections: sidebar and main content
 - In the sidebar list 20 users (in the docs you should find how to limit number of users)
