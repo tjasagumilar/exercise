@@ -48,5 +48,7 @@ Your server should be available at http://127.0.0.1:8000
 - Create an `PUT` endpoint, where you can edit specific user based on id. You can find list of users in `users.py` file.
 - **Bonus**
   - Connect React app to use newly created python endpoints instead of DummyJSON
+- **Bonus 2**
+  - Write tests to ensure everything works properly
 
 If you need help contact me at jan@syyclops.com or anthony.demattos@syyclops.com.
