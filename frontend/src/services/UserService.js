@@ -19,3 +19,13 @@ export const fetchUserDetails = async (userId) => {
         throw error;
     }
 };
+
+export const updateUserDetails = async (userId, userData) => {
+    try {
+        const response = await axios.put(`https://dummyjson.com/users/${userId}`, userData);
+        return response.data;
+    } catch (error) {
+        console.error('Error updating user:', error);
+        throw error;
+    }
+};
