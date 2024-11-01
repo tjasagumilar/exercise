@@ -1,7 +1,7 @@
 import { fetchUsers } from "../../services/UserService";
 import React, { useEffect, useState } from 'react';
 
-const Sidebar = () => {
+const Sidebar = ({ onSelectUser }) => {
     const [users, setUsers] = useState([])
 
     useEffect(() => {
@@ -18,7 +18,7 @@ const Sidebar = () => {
             <div className="users">
                 <ul>
                     {users.map(user => (
-                        <li key={user.id}>
+                        <li key={user.id} onClick={() => onSelectUser(user.id)}>
                             {user.firstName} {user.lastName}
                         </li>
                     ))}
