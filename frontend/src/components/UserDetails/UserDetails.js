@@ -44,21 +44,24 @@ const UserDetails = ({ userId }) => {
     };
 
     return (
-        <div>
+        <div className="flex-1 flex items-center justify-center">
             {selectedUser ? (
-                <div>
+                <div className="p-4 border border-black rounded-lg w-1/3">
+                    <h2 className="text-black text-center text-3xl font-bold p-2">User Details</h2>
                     <UserDetailsForm user={selectedUser} isEditing={isEditing} onChange={handleUserDataChange} />
-                    {!isEditing ? (
-                        <button onClick={() => setIsEditing(true)}>Edit</button>
-                    ) : (
-                        <div>
-                            <button onClick={handleSaveUser}>Save</button>
-                            <button onClick={handleCancelEdit}>Cancel</button>
-                        </div>
-                    )}
+                    <div className="flex justify-end mt-4">
+                        {!isEditing ? (
+                            <button onClick={() => setIsEditing(true)} className="bg-customBlue text-white py-2 px-4 rounded-lg hover:bg-customLightBlue transition">Edit</button>
+                        ) : (
+                            <div className="flex space-x-2">
+                                <button onClick={handleSaveUser} className="bg-customBlue text-white py-2 px-4 rounded-lg hover:bg-customLightBlue transition">Save</button>
+                                <button onClick={handleCancelEdit} className="bg-customOrange text-white py-2 px-4 rounded-lg hover:bg-orange-500 transition">Cancel</button>
+                            </div>
+                        )}
+                    </div>
                 </div>
             ) : (
-                <p>No user selected</p> // Sporočilo, če ni izbran noben uporabnik
+                <p>No user selected.</p>
             )}
         </div>
     );

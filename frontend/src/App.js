@@ -6,13 +6,13 @@ function App() {
   const [selectedUserId, setSelectedUserId] = useState(null);
 
   const handleSelectUser = (userId) => {
-    setSelectedUserId(userId); 
+    setSelectedUserId(userId);
   }
 
   return (
-    <div className="flex items-center h-full w-full">
-      <Sidebar onSelectUser={handleSelectUser}/>
-      <UserDetails userId={selectedUserId}/>
+    <div className="flex h-screen font-madefor">
+      <Sidebar onSelectUser={handleSelectUser} />
+      <UserDetails userId={selectedUserId} />
     </div>
 
   );
