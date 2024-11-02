@@ -1,16 +1,20 @@
 import { fetchUserDetails, updateUserDetails } from "../../services/UserService";
 import { useState, useEffect } from "react";
 import UserDetailsForm from "../UserDetailsForm/UserDetailsForm";
+import { validateUserData } from "../../services/Validation";
 
 const UserDetails = ({ userId }) => {
     const [selectedUser, setSelectedUser] = useState(null);
+    const [originalUser, setOriginalUser] = useState(null);
     const [isEditing, setIsEditing] = useState(false);
+    const [errors, setErrors] = useState({});
 
     useEffect(() => {
         const getUserDetails = async () => {
             try {
                 const userData = await fetchUserDetails(userId);
                 setSelectedUser(userData);
+                setOriginalUser(userData);
             } catch (error) {
                 console.error("Error fetching user details:", error);
                 setSelectedUser(null);
@@ -20,11 +24,20 @@ const UserDetails = ({ userId }) => {
         if (userId) {
             getUserDetails();
         }
+        setIsEditing(false);
 
     }, [userId]);
 
     const handleSaveUser = async () => {
         if (!selectedUser) return;
+
+        const validationErrors = validateUserData(selectedUser);
+        if (Object.keys(validationErrors).length > 0) {
+            setErrors(validationErrors);
+            return;
+        } else {
+            setErrors({}); 
+        }
 
         try {
             const updatedUser = await updateUserDetails(selectedUser.id, selectedUser);
@@ -36,6 +49,8 @@ const UserDetails = ({ userId }) => {
     };
 
     const handleCancelEdit = () => {
+        setSelectedUser(originalUser);
+        setErrors({});
         setIsEditing(false);
     };
 
@@ -48,7 +63,7 @@ const UserDetails = ({ userId }) => {
             {selectedUser ? (
                 <div className="p-4 border border-black rounded-lg w-1/3">
                     <h2 className="text-black text-center text-3xl font-bold p-2">User Details</h2>
-                    <UserDetailsForm user={selectedUser} isEditing={isEditing} onChange={handleUserDataChange} />
+                    <UserDetailsForm user={selectedUser} isEditing={isEditing} onChange={handleUserDataChange} errors={errors}/>
                     <div className="flex justify-end mt-4">
                         {!isEditing ? (
                             <button onClick={() => setIsEditing(true)} className="bg-customBlue text-white py-2 px-4 rounded-lg hover:bg-customLightBlue transition">Edit</button>

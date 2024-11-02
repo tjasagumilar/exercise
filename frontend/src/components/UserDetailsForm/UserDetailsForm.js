@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const UserDetailsForm = ({ user, isEditing, onChange }) => {
+const UserDetailsForm = ({ user, isEditing, onChange, errors }) => {
     const [userData, setUserData] = useState({
         id: "",
         firstName: "",
@@ -30,6 +30,7 @@ const UserDetailsForm = ({ user, isEditing, onChange }) => {
         const updatedUserData = { ...userData, [name]: value };
         setUserData(updatedUserData);
         onChange(updatedUserData);
+
     };
 
     return (
@@ -45,6 +46,7 @@ const UserDetailsForm = ({ user, isEditing, onChange }) => {
                         disabled={!isEditing}
                         className="w-full mt-2 p-2 border border-black rounded-lg" />
                 </label>
+                {errors.id && <p className="text-red-500">{errors.id}</p>}
                 <label>
                     First Name
                     <input
@@ -55,6 +57,7 @@ const UserDetailsForm = ({ user, isEditing, onChange }) => {
                         disabled={!isEditing}
                         className="w-full mt-2 p-2 border border-black rounded-lg" />
                 </label>
+                {errors.firstName && <p className="text-red-500">{errors.firstName}</p>}
                 <label>
                     Last Name
                     <input
@@ -65,6 +68,7 @@ const UserDetailsForm = ({ user, isEditing, onChange }) => {
                         disabled={!isEditing}
                         className="w-full mt-2 p-2 border border-black rounded-lg" />
                 </label>
+                {errors.lastName && <p className="text-red-500">{errors.lastName}</p>}
                 <label>
                     Age
                     <input
@@ -76,6 +80,7 @@ const UserDetailsForm = ({ user, isEditing, onChange }) => {
                         disabled={!isEditing}
                         className="w-full mt-2 p-2 border border-black rounded-lg" />
                 </label>
+                {errors.age && <p className="text-red-500">{errors.age}</p>}
                 <label>
                     Gender
                     <select name="gender" value={userData.gender} onChange={handleChange} disabled={!isEditing} className="bg-white w-full mt-2 p-2 border border-black rounded-lg" >
@@ -95,6 +100,7 @@ const UserDetailsForm = ({ user, isEditing, onChange }) => {
                         className="w-full mt-2 p-2 border border-black rounded-lg"
                     />
                 </label>
+                {errors.email && <p className="text-red-500">{errors.email}</p>}
                 <label>
                     Phone
                     <input
@@ -105,6 +111,7 @@ const UserDetailsForm = ({ user, isEditing, onChange }) => {
                         disabled={!isEditing}
                         className="w-full mt-2 p-2 border border-black rounded-lg" />
                 </label>
+                {errors.phone && <p className="text-red-500">{errors.phone}</p>}
             </form>
         </div>
     );
