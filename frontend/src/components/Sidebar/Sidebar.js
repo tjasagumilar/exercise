@@ -1,7 +1,7 @@
 import { fetchUsers } from "../../services/UserService";
 import React, { useEffect, useState } from 'react';
 
-const Sidebar = ({ onSelectUser }) => {
+const Sidebar = ({ onSelectUser, refresh }) => {
     const [users, setUsers] = useState([])
 
     useEffect(() => {
@@ -10,7 +10,7 @@ const Sidebar = ({ onSelectUser }) => {
             setUsers(users);
         };
         getUsers();
-    }, []);
+    }, [refresh]);
 
     return (
         <div className="sidebar bg-customBlue text-customOrange p-10 h-full top-0 left-0">

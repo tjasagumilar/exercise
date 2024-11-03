@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import UserDetailsForm from "../UserDetailsForm/UserDetailsForm";
 import { validateUserData } from "../../services/Validation";
 
-const UserDetails = ({ userId }) => {
+const UserDetails = ({ userId, onUserUpdated}) => {
     const [selectedUser, setSelectedUser] = useState(null);
     const [originalUser, setOriginalUser] = useState(null);
     const [isEditing, setIsEditing] = useState(false);
@@ -43,6 +43,7 @@ const UserDetails = ({ userId }) => {
             const updatedUser = await updateUserDetails(selectedUser.id, selectedUser);
             setSelectedUser(updatedUser);
             setIsEditing(false);
+            onUserUpdated();
         } catch (error) {
             console.error("Failed to update user:", error);
         }
